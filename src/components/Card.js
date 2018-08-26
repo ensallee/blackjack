@@ -27,9 +27,41 @@ class Card extends Component {
   }
 
   render() {
+    let displayValue;
+    switch(this.props.value) {
+      case "QUEEN":
+        displayValue= "Q";
+        break;
+      case "KING":
+        displayValue= "K";
+        break;
+      case "JACK":
+        displayValue= "J";
+        break;
+      case "ACE":
+        displayValue= "A";
+        break;
+      default:
+        displayValue = this.props.value;
+    }
     return (
       <Fragment>
-        {this.state.flipped ? <img src={this.props.image} /> : <img onClick={this.flipCard} src="http://cdn.shopify.com/s/files/1/0200/7616/products/playing-cards-bicycle-tangent-back-1_grande.png?v=1474345861" /> }
+        {this.state.flipped ? <div className="flipped-card">
+          <h3 className={this.props.suit === "HEARTS" || this.props.suit === "DIAMONDS" ? "red value-of-card" : "value-of-card"}>{displayValue}</h3>
+          <div className="suit-container">
+            {this.props.suit === "HEARTS" ? <img src={require('../images/heart.png')}></img> : null}
+            {this.props.suit === "CLUBS" ? <img src={require('../images/club.jpg')}></img> : null}
+            {this.props.suit === "DIAMONDS" ? <img src={require('../images/diamond.png')}></img> : null}
+            {this.props.suit === "SPADES" ? <img src={require('../images/spade.jpg')}></img> : null}
+          </div>
+          <div className="bottom-suit-container">
+            {this.props.suit === "HEARTS" ? <img src={require('../images/heart.png')}></img> : null}
+            {this.props.suit === "CLUBS" ? <img src={require('../images/club.jpg')}></img> : null}
+            {this.props.suit === "DIAMONDS" ? <img src={require('../images/diamond.png')}></img> : null}
+            {this.props.suit === "SPADES" ? <img src={require('../images/spade.jpg')}></img> : null}
+          </div>
+          <h3 className={this.props.suit === "HEARTS" || this.props.suit === "DIAMONDS" ? "red bottom-value-of-card" : "bottom-value-of-card"}>{displayValue}</h3>
+        </div> : <div onClick={this.flipCard} className="hidden-card" />}
       </Fragment>
     )
   }

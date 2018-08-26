@@ -2,33 +2,97 @@
   text-align: center;
 }
 
-/* .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.rules {
+  margin: 0 auto;
+  width: 75%;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-} */
-
-.card {
+.flipped-card {
   border: 1px solid black;
-  width: 100px;
+  display: inline-block;
+  margin: 8px;
+  width: 120px;
   height: 200px;
+  position: relative;
+  background-color: white;
+  font-family: Georgia, Times New Roman, serif;
+  border-radius: 3px;
+}
+
+.hidden-card {
+  border: 1px solid black;
+  display: inline-block;
+  margin: 8px;
+  width: 120px;
+  height: 200px;
+  background-image: url("http://cdn.shopify.com/s/files/1/0200/7616/products/playing-cards-bicycle-tangent-back-1_grande.png?v=1474345861");
+  background-size: 100% 100%;
+  position: relative;
+  border-radius: 3px;
+}
+
+.red {
+  color: red;
+}
+
+.value-of-card {
+  position: absolute;
+  top: -10px;
+  left: 5px;
+}
+
+.bottom-value-of-card {
+  position: absolute;
+  bottom: -10px;
+  right: 5px;
+}
+
+.hand {
+  text-align: center;
+}
+
+#title {
+  text-align: center;
+  font-family: 'Monoton', cursive;
+}
+
+.center {
+  text-align: center;
+}
+
+.suit-container {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin-top: 30px;
+}
+
+.suit-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-suit-container {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: block;
+    bottom: 30px;
+    right: 0px;
+}
+
+.bottom-suit-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.button {
+  padding: 5px;
+  border-radius: 5px;
+  margin: 4px;
+}
+
+.button:hover{
+  border: 1px solid red;
 }

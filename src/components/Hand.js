@@ -2,14 +2,6 @@ import React, { Component, Fragment } from 'react';
 import Card from './Card'
 
 class Hand extends Component {
-  // constructor(props) {
-  //   super(props)
-  //
-  //   this.state={
-  //     sum: 0,
-  //     hasThree: false
-  //   }
-  // }
 
   changeSum = (value, flippedStatus) => {
     if (flippedStatus) {
@@ -23,13 +15,15 @@ class Hand extends Component {
   })
   return (
     <Fragment>
-      <div>{cardComponents}</div>
-      <h6>Sum: {this.props.sum}</h6>
-      <button onClick={() => this.props.dealAnotherCard(this.props.player)}>Hit me!</button>
-      <button onClick={this.props.determineWinner}>Stay</button>
+      <div className="center">
+        <button className="button" onClick={() => this.props.dealAnotherCard(this.props.player)}>Hit me!</button>
+        {this.props.player === "player" ? <button className="button" onClick={this.props.determineWinner}>Stay</button> : null}
+        <h5>Score: {this.props.sum}</h5>
+        <div>{cardComponents}</div>
+      </div>
     </Fragment>
     )
   }
 }
 
-export default Hand
+export default Hand;
