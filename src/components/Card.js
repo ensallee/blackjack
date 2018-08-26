@@ -23,19 +23,13 @@ class Card extends Component {
       this.setState({
         flipped: true
       }, () => this.props.changeSum(value, this.state.flipped))
-    } else {
-      this.setState({
-        flipped: false
-      })
     }
   }
 
   render() {
-    // console.log('props inside card', this.props)
-    console.log('props inside card')
     return (
       <Fragment>
-        {this.state.flipped ? <img onClick={this.flipCard} src={this.props.image} /> : <img onClick={this.flipCard} src="http://cdn.shopify.com/s/files/1/0200/7616/products/playing-cards-bicycle-tangent-back-1_grande.png?v=1474345861" /> }
+        {this.state.flipped ? <img src={this.props.image} /> : <img onClick={this.flipCard} src="http://cdn.shopify.com/s/files/1/0200/7616/products/playing-cards-bicycle-tangent-back-1_grande.png?v=1474345861" /> }
       </Fragment>
     )
   }

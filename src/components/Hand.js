@@ -2,25 +2,18 @@ import React, { Component, Fragment } from 'react';
 import Card from './Card'
 
 class Hand extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state={
-      sum: 0,
-      hasThree: false
-    }
-  }
+  // constructor(props) {
+  //   super(props)
+  //
+  //   this.state={
+  //     sum: 0,
+  //     hasThree: false
+  //   }
+  // }
 
   changeSum = (value, flippedStatus) => {
-    console.log('value inside changeSum', value)
     if (flippedStatus) {
-      this.setState({
-        sum: this.state.sum += value
-      })
-    } else {
-      this.setState({
-        sum: this.state.sum -= value
-      })
+      this.props.changeSum(this.props.player, value)
     }
   }
 
@@ -31,8 +24,9 @@ class Hand extends Component {
   return (
     <Fragment>
       <div>{cardComponents}</div>
-      <h6>Sum: {this.state.sum}</h6>
-      {this.props.cards.length !== 3 ? <button onClick={() => this.props.dealAnotherCard(this.props.player)}>Hit me!</button> : null}
+      <h6>Sum: {this.props.sum}</h6>
+      <button onClick={() => this.props.dealAnotherCard(this.props.player)}>Hit me!</button>
+      <button onClick={this.props.determineWinner}>Stay</button>
     </Fragment>
     )
   }

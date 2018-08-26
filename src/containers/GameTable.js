@@ -9,7 +9,9 @@ class GameTable extends Component {
       deckId: null,
       inProgress: false,
       dealerCards: [],
-      playerCards: []
+      playerCards: [],
+      dealerSum: 0,
+      playerSum: 0,
     }
   }
 
@@ -40,23 +42,94 @@ class GameTable extends Component {
       if (player === "player") {
         this.setState({
           playerCards: [...this.state.playerCards, data.cards[0]]
-        }, () => console.log('playercards after adding', this.state.playerCards))
+        })
       } else if (player === "dealer") {
         this.setState({
           dealerCards: [...this.state.dealerCards, data.cards[0]]
-        }, () => console.log('dealercards after adding', this.state.dealerCards))
+        })
       }
     })
+  }
+
+  determineWinner = () => {
+    let totalDealerSum = 0
+    this.state.dealerCards.forEach(card => {
+      console.log('card.value inside determineWinner', card.value)
+      if (card.value === "ACE") {
+        totalDealerSum += 1;
+      } else if (parseInt(card.value)) {
+        totalDealerSum += parseInt(card.value)
+      } else {
+        totalDealerSum += 10;
+      }
+    })
+    if (this.state.playerSum === 21 && this.state.playerSum !== totalDealerSum) {
+      alert("Blackjack! You win!")
+      this.setState({
+        inProgress: false,
+        dealerCards: [],
+        playerCards:[],
+        dealerSum: 0,
+        playerSum: 0
+      })
+    } else if (this.state.playerSum > totalDealerSum && this.state.playerSum <= 21) {
+      alert("You win!")
+      this.setState({
+        inProgress: false,
+        dealerCards: [],
+        playerCards:[],
+        dealerSum: 0,
+        playerSum: 0
+      })
+    } else if (this.state.playerSum < totalDealerSum && totalDealerSum <= 21) {
+      alert("Dealer wins! Better luck next time.")
+      this.setState({
+        inProgress: false,
+        dealerCards: [],
+        playerCards:[],
+        dealerSum: 0,
+        playerSum: 0
+      })
+    } else if (this.state.playerSum >= 21) {
+      alert("Bust!!")
+      this.setState({
+        inProgress: false,
+        dealerCards: [],
+        playerCards:[],
+        dealerSum: 0,
+        playerSum: 0
+      })
+    } else if (this.state.playerSum === this.state.dealerSum && this.state.playerSum <= 21) {
+      alert("It's a tie!")
+      this.setState({
+        inProgress: false,
+        dealerCards: [],
+        playerCards:[],
+        dealerSum: 0,
+        playerSum: 0
+      })
+    }
+  }
+
+  changeSum = (player, value) => {
+    if (player === "player") {
+      this.setState({
+        playerSum: this.state.playerSum += value
+      })
+    } else {
+      this.setState({
+        dealerSum: this.state.dealerSum += value
+      })
+    }
   }
 
   render() {
     return (
       <Fragment>
-        {this.state.inProgress ? null : <button onClick={this.drawCards}>Start Game</button>}
-        <h1>Dealers Cards!</h1>
-        <Hand player="dealer" dealAnotherCard={this.dealAnotherCard} cards={this.state.dealerCards} />
-        <h1>Players Cards!</h1>
-        <Hand player="player" dealAnotherCard={this.dealAnotherCard} cards={this.state.playerCards} />
+        {this.state.inProgress ? <Fragment><h1>Dealers Cards!</h1>
+                <Hand player="dealer" determineWinner={this.determineWinner} changeSum={this.changeSum} sum={this.state.dealerSum} dealAnotherCard={this.dealAnotherCard} cards={this.state.dealerCards} />
+                <h1>Players Cards!</h1>
+                <Hand player="player" determineWinner={this.determineWinner} changeSum={this.changeSum} sum={this.state.playerSum} dealAnotherCard={this.dealAnotherCard} cards={this.state.playerCards} /></Fragment> : <button onClick={this.drawCards}>Start Game</button>}
       </Fragment>
     )
   }
