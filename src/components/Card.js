@@ -19,11 +19,9 @@ class Card extends Component {
     } else {
       value = 10;
     }
-    if (!this.state.flipped) {
-      this.setState({
-        flipped: true
-      }, () => this.props.changeSum(value, this.state.flipped))
-    }
+    this.setState({
+      flipped: true
+    }, () => this.props.changeSum(this.props.player, value))
   }
 
   render() {
